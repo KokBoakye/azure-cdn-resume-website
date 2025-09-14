@@ -48,7 +48,7 @@ jobs:
                 --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
                 --account-key ${{ secrets.AZURE_STORAGE_KEY }} \
                 --destination '$web' \
-                --source ${{ github.workspce }}/website
+                --source ${{ github.workspace }}/website
 
     #   - name: Purge Azure CDN Cache
     #     run: |
