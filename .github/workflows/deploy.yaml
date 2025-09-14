@@ -1,0 +1,48 @@
+name: Deploy Resume Website to Azure
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform
+        
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up terraform
+        uses: hashicorp/setup-terraform@v2
+        
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+      - name: Upload to Azure Storage
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            az storage blob upload-batch \
+                --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
+                --account-key ${{ secrets.AZURE_STORAGE_KEY }} \
+                --destination '$web' \
+                --source ${{ github.workspce }}/website
+
+    #   - name: Purge Azure CDN Cache
+    #     run: |
+    #       az cdn endpoint purge \
+    #         --resource-group resume-rg \
+    #         --profile-name resume-cdn \
+    #         --name resume-endpoint \
+    #         --content-paths "/*"
