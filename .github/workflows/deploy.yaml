@@ -35,11 +35,11 @@ jobs:
 
       - name: Upload to Azure Storage
         run: |
-         az storage blob upload-batch \
-                --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
-                --account-key ${{ secrets.AZURE_STORAGE_KEY }} \
-                --destination '$web' \
-                --source ${{ github.workspace }}/website
+          az storage blob upload-batch \
+            --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
+            --destination '$web' \
+            --source ${{ github.workspace }}/website \
+            --auth-mode login
 
     #   - name: Purge Azure CDN Cache
     #     run: |
