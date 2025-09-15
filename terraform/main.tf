@@ -21,16 +21,16 @@ resource "azurerm_storage_account_static_website" "static_website" {
 
 
 # Create CDN
-resource "azurerm_cdn_frontdoor_profile" "cdn" {
-  name = "resume-cdn"
-
+resource "azurerm_cdn_profile" "cdn" {
+  name                = "resume-cdn"
+  location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  sku_name            = "Standard_AzureFrontDoor"
+  sku                 = "Standard_ChinaCdn"
 }
 
 resource "azurerm_cdn_endpoint" "cdn_endpoint" {
   name                = "resume-endpoint"
-  profile_name        = azurerm_cdn_frontdoor_profile.cdn.name
+  profile_name        = azurerm_cdn_profile.cdn.name
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
 
