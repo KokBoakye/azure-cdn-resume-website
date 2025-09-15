@@ -38,4 +38,4 @@ resource "azurerm_storage_account_static_website" "static_website" {
 #     name      = "storage-origin"
 #     host_name = azurerm_storage_account.storage.primary_web_host
 #   }
-# }
+# } #
