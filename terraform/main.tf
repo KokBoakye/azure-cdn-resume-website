@@ -1,23 +1,23 @@
-resource "azurerm_resource_group" "rg" {
-  name     = "resume-rg"
-  location = "East US"
-}
+# resource "azurerm_resource_group" "rg" {
+#   name     = "resume-rg"
+#   location = "East US"
+# }
 
-# Create Storage Account with Static Website Hosting
-resource "azurerm_storage_account" "storage" {
-  name                     = "resumestorage13092025" # must be globally unique
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+# # Create Storage Account with Static Website Hosting
+# resource "azurerm_storage_account" "storage" {
+#   name                     = "resumestorage13092025" # must be globally unique
+#   resource_group_name      = azurerm_resource_group.rg.name
+#   location                 = azurerm_resource_group.rg.location
+#   account_tier             = "Standard"
+#   account_replication_type = "LRS"
 
-}
+# }
 
-resource "azurerm_storage_account_static_website" "static_website" {
-  storage_account_id = azurerm_storage_account.storage.id
-  index_document     = "index.html"
-  error_404_document = "404.html"
-}
+# resource "azurerm_storage_account_static_website" "static_website" {
+#   storage_account_id = azurerm_storage_account.storage.id
+#   index_document     = "index.html"
+#   error_404_document = "404.html"
+# }
 
 
 # # Create CDN
@@ -39,3 +39,4 @@ resource "azurerm_storage_account_static_website" "static_website" {
 #     host_name = azurerm_storage_account.storage.primary_web_host
 #   }
 # } #
+
