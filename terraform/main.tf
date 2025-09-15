@@ -21,11 +21,11 @@ resource "azurerm_storage_account_static_website" "static_website" {
 
 
 # Create CDN
-resource "azurerm_cdn_profile" "cdn" {
-  name                = "resume-cdn"
-  location            = azurerm_resource_group.rg.location
+resource "azurerm_cdn_frontdoor_profile" "cdn" {
+  name = "resume-cdn"
+
   resource_group_name = azurerm_resource_group.rg.name
-  sku                 = "Standard_Microsoft"
+  sku_name            = "Standard_AzureFrontDoor"
 }
 
 resource "azurerm_cdn_endpoint" "cdn_endpoint" {
