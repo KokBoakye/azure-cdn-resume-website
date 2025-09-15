@@ -42,10 +42,10 @@ jobs:
             --source ${{ github.workspace }}/website
 
 
-    #   - name: Purge Azure CDN Cache
-    #     run: |
-    #       az cdn endpoint purge \
-    #         --resource-group resume-rg \
-    #         --profile-name resume-cdn \
-    #         --name resume-endpoint \
-    #         --content-paths "/*"
+      - name: Purge Azure CDN Cache
+        run: |
+          az cdn endpoint purge \
+            --resource-group resume-rg \
+            --profile-name resume-cdn \
+            --name resume-endpoint \
+            --content-paths "/*"
