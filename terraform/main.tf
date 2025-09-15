@@ -25,7 +25,7 @@ resource "azurerm_cdn_profile" "cdn" {
   name                = "resume-cdn"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  sku                 = "Standard_Akamai"
+  sku                 = "Standard_Microsoft"
 }
 
 resource "azurerm_cdn_endpoint" "cdn_endpoint" {
@@ -36,6 +36,6 @@ resource "azurerm_cdn_endpoint" "cdn_endpoint" {
 
   origin {
     name      = "storage-origin"
-    host_name = azurerm_storage_account.storage.primary_web_endpoint
+    host_name = azurerm_storage_account.storage.primary_web_host
   }
 }
