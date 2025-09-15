@@ -30,7 +30,7 @@ resource "azurerm_cdn_frontdoor_profile" "cdn" {
 
 resource "azurerm_cdn_endpoint" "cdn_endpoint" {
   name                = "resume-endpoint"
-  profile_name        = azurerm_cdn_profile.cdn.name
+  profile_name        = azurerm_cdn_frontdoor_profile.cdn.name
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
 
